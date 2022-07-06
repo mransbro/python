@@ -16,7 +16,7 @@
 - [Regex](regex)
 - [Decorators](decorators)
 
-## Use cases
+## Common Tasks
 
 - [Query an API](./notes/query_api)
 - [Parse Log file](./nodes/parse_log_file)

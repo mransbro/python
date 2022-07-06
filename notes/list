@@ -1,0 +1,27 @@
+# Lists
+
+```python
+[1,'one',True,(1,2,3)]
+```
+
+## Methods
+
+```python
+[1,2,3].append(4)
+```
+
+```python
+[].pop()
+```
+
+```python
+['dog','cat','cat'].count('cat')
+```
+
+```python
+[3,1,2].sort()
+```
+
+```python
+['a','b','c'].index('c')
+```
