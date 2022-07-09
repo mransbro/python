@@ -2,13 +2,14 @@
 
 ## Opening a file
 
-Recap of the basics to opening a file. Using the with statement makes the code cleaner. The default filemode is read, other modes include "w" for write and "a" for append.
+Python includes the open() function for open files and returning a file object. The default filemode is read, other modes include "w" for write and "a" for append.
 
 ```python
 f = open("/file/path/file.log", "r")
 f.read()
 f.close()
 ```
+
 Using the with statement makes the code cleaner.
 
 ```python
@@ -18,7 +19,7 @@ with open("/file/path/file.log", "r") as f:
 
 ## Reading the file
 
-The read method will load the whole file into a string object. Not ideal for analysing a log file.
+The read method will load the whole file into a string object. This is ok in some cases but generally not ideal for analysing a log file.
 
 ```python
 with open("/file/path/file.log", "r") as f:
@@ -26,7 +27,6 @@ with open("/file/path/file.log", "r") as f:
 ```
 
 The readlines method will load all lines into a list. Now the data is a list of string its easier to analyse.
-
 
 ```python
 with open("/file/path/file.log", "r") as f:
@@ -46,22 +46,26 @@ with open("/file/path/file.log", "r") as f:
 
 ```
 
+The cleanest method however is to simply loop over the file object.
 
 ```python
 with open("/file/path/file.log", "r") as f:
     for line in f:
-        print(line)
+        if "ERROR" in line:
+            print(line)
 ```
 
-## Handling the file contents
+## Handling file contents
 
-split() splits a string into a list delimited by the passed pattern.
+Typically when handing log files we need to search or filter for a pattern and then split or extract the data.
+
+```split()``` splits a string into a list. A string can be split by any character. The character to use will depend on the structure of the file but common examples are comma, newline or whitespace. 
 
 ```python
-line.split(":")
+line.split()
 ```
 
-Slice the line. 
+Slice the line at fixed indexs or combine with the string method ```rfind()``` which returns the highest index of a substring. 
 
 ```python
 end = line.rfind(".GIF")
@@ -69,6 +73,14 @@ start = line.rfind("/")
 filename = line[start:end]
 ```
 
+
+## Extract data
+```python
+with open("./wifi.log") as reader, open("./wifi_errors.log", "w") as writer:
+    for line in reader:
+        if "ERROR" in line:
+            writer.write(line[line.rfind("ERROR:"):])
+```
 
 ## Replace a pattern
 
